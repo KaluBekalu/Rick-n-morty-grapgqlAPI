@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, createContext } from "react";
+import Header from "./components/header/Header";
+import Card from "./components/card/Card";
+import Modal from "./components/modal/Modal";
+import { RootContext } from "./contexts/Context";
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RootContext.Provider value={{ showModal, setShowModal }}>
+        {showModal && <Modal />}
+        <Header />
+        <div className="container">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </RootContext.Provider>
     </div>
   );
 }

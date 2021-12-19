@@ -1,0 +1,84 @@
+.modal {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  background: #2c230673;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  width: 50%;
+  height: 90%;
+  border-radius: 15px;
+  padding: 10px 10px;
+}
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 30px 15px 30px;
+}
+hr {
+  width: 97%;
+  margin: 0 auto;
+}
+.modal-head > .left {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-head > .left > img {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.modal-head > .right {
+  display: flex;
+  align-items: center;
+}
+
+.modal-head > .right > button {
+  background: #ffeb3b;
+  padding: 17px 19px;
+  font-size: 17px;
+  border-radius: 7px;
+  border: 0;
+  font-weight: bolder;
+  margin-right: 15px;
+}
+
+.modal-head > .right > i {
+  font-size: 31px;
+  font-weight: 100;
+}
+
+.modal-head > .right > i:hover {
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.1s ease-in-out;
+}
+
+.modal {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px 20px;
+  padding-top: 20px;
+}
+
+

@@ -1,0 +1,33 @@
+.episode {
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background: white;
+  padding: 13px 0px;
+  border: 2px solid #79554821;
+  border-radius: 20px;
+  font-size: 90%;
+}
+.episode > h2 {
+  margin-left: 20px;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+}
+
+.episode-number {
+  display: flex;
+  justify-content: space-between;
+  width: 32%;
+  align-items: center;
+}
+
+.episode-number > i,
+.episode-calendar > i {
+  color: #e4b005;
+  font-size: 125%;
+}
