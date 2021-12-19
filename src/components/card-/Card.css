@@ -1,5 +1,5 @@
 .card {
-  width: 450px;
+  width: 500px;
   display: flex;
   justify-content: space-around;
   background: white;
@@ -14,8 +14,7 @@
   justify-content: space-around;
 }
 .card > img {
-  width: 150px;
-  height: 150px;
+  width: 40%;
   border-radius: 20px;
   margin-right: 15px;
 }
@@ -47,7 +46,6 @@
   border-radius: 9px;
   margin-left: auto;
   font-weight: 700;
-  border: 0;
 }
 
 .episode-btn:hover {

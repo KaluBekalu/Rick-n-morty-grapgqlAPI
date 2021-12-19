@@ -1,48 +1,16 @@
-import "./Card.css";
 import { useEffect, useState, useContext } from "react";
 import { RootContext } from "../../contexts/Context";
+import "./Card.css";
 
-function Card() {
+function Card({ data }) {
   const { setShowModal } = useContext(RootContext);
-
-  const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("https://rickandmortyapi.com/graphql", {
-  //     method: "POST",
-
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-
-  //     body: JSON.stringify({
-  //       query: `{
-  //         characters {
-  //         results {
-  //           name
-  //           origin{
-  //             name
-  //           }
-  //           species
-  //         }
-  //       }
-  //     }`,
-  //     }),
-  //   })
-  //     .then((result) => result.json())
-  //     .then((data) => {
-  //       const res = data.data.characters;
-  //       setData(res);
-  //       console.log(res);
-  //     });
-  // }, []);
 
   return (
     <div className="card">
       <img src="/Rick_Sanchez.png" alt="image_" />
       <div className="content">
         <div className="top">
-          <h1 className="card-title">Rick Sanchez</h1>
+          <h1 className="card-title">{data.name}</h1>
           <i className="far fa-heart"></i>
         </div>
         <div className="detail">
