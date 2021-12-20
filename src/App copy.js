@@ -1,7 +1,8 @@
 import { useState, useEffect, createContext } from "react";
+import Modal from "./components/modal/Modal2";
 import Home from "./components/home/Home";
 import { RootContext } from "./contexts/Context";
-import { Route, Routes } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 import {
   ApolloClient,
@@ -32,8 +33,6 @@ const client = new ApolloClient({
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-
-  const [gqldata, setgqlData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalId, setmodalId] = useState();
   const [modalData, setModaldata] = useState([]);
@@ -45,17 +44,24 @@ function App() {
           showModal,
           modalData,
           modalId,
-          gqldata,
-          setgqlData,
           setmodalId,
           setShowModal,
           setModaldata,
         }}
       >
         <ApolloProvider client={client}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <Link
+            to={{
+              pathname: "/modal/1",
+              state: { modal: true },
+            }}
+          >
+            Open Modal
+          </Link>
+          <Switch>
+            {/* <Modal /> */}
+            <Route exact path="/" component={Home} />
+          </Switch>
         </ApolloProvider>
       </RootContext.Provider>
     </div>

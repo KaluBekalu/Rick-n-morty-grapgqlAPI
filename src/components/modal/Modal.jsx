@@ -1,37 +1,70 @@
-import { useContext } from "react";
-import "./Modal.css";
+import { useContext, useEffect, useState } from "react";
+import { useQuery, gql } from "@apollo/client";
 import Episode from "../episode/Episode";
 import { RootContext } from "../../contexts/Context";
+// import { LOAD_MODAL_DATA } from "../../graphql/queries";
+import "./Modal.css";
 
 function Modal() {
-  const { setShowModal } = useContext(RootContext);
+  const { setShowModal, modalId } = useContext(RootContext);
+  const [episodes, setEpisode] = useState([]);
+  const [image, setImage] = useState();
+  const [name, setName] = useState();
+
+  const LOAD_MODAL_DATA = gql`
+  query {
+    character(id: ${modalId}) {
+      name
+      image
+      episode {
+        id
+        episode
+        air_date
+      }
+    }
+  }
+`;
+
+  const { error, loading, data } = useQuery(LOAD_MODAL_DATA);
+
+  useEffect(() => {
+    if (data) {
+      // setgqlData(data.characters.results);
+      setName(data.character.name);
+      setImage(data.character.image);
+      setEpisode(data.character.episode);
+    }
+  }, [data]);
 
   return (
     <div className="modal">
-      <div className="modal-content">
-        <div className="modal-head">
-          <div className="left">
-            <img src="/Rick_Sanchez.png" alt="avatar" />
-            <h2>Rick Sanchez</h2>
-            <i className="far fa-heart"></i>
+      <div className="modal-wrapper">
+        {name && (
+          <div>
+            <div className="modal-head">
+              <div className="left">
+                <img src={image} alt="avatar" />
+                <h2>{name}</h2>
+                <i className="far fa-heart"></i>
+              </div>
+              <div className="right">
+                <button>{episodes.length} Episodes</button>
+                <i
+                  onClick={() => setShowModal(false)}
+                  className="far fa-times-circle"
+                ></i>
+              </div>
+            </div>
+            <hr />
           </div>
-          <div className="right">
-            <button>40 Episodes</button>
-            <i
-              onClick={() => setShowModal(false)}
-              className="far fa-times-circle"
-            ></i>
-          </div>
-        </div>
-        <hr />
-
+        )}
+        {/* <div className="modal-content"> */}
         <div className="bottom">
-          <Episode />
-          <Episode />
-          <Episode />
-          <Episode />
-          <Episode />
-          <Episode />
+          {episodes &&
+            episodes.map((episode) => (
+              <Episode key={episode.id} episode={episode} />
+            ))}
+          {/* </div> */}
         </div>
       </div>
     </div>

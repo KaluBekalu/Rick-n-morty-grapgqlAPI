@@ -1,12 +1,14 @@
 import { useEffect, useState, useContext } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { LOAD_DATA } from "../../graphql/queries";
 import { RootContext } from "../../contexts/Context";
+import Modal from "../modal/Modal";
 import "./Card.css";
+import { Link } from "react-router-dom";
 
 function Card() {
-  const [gqldata, setgqlData] = useState([]);
-  const { setShowModal } = useContext(RootContext);
+  const { setShowModal, setgqlData, gqldata, setmodalId, showModal } =
+    useContext(RootContext);
 
   const { error, loading, data } = useQuery(LOAD_DATA);
 
@@ -16,14 +18,18 @@ function Card() {
     }
   }, [data]);
 
+  const handleWatchEpisode = (e) => {
+    setShowModal(true);
+    setmodalId(e.target.name);
+  };
+
   return (
     <>
+      {showModal && <Modal />}
       {gqldata ? (
         gqldata.map((d) => {
-          console.log(d.name);
-          //   <Card data={d} />;
           return (
-            <div className="card">
+            <div className="card" key={d.id}>
               <img src={d.image} alt="image_" />
               <div className="content">
                 <div className="top">
@@ -40,8 +46,10 @@ function Card() {
                     <h4>{d.species}</h4>
                   </div>
                 </div>
+                {/* {console.log(d.id)} */}
                 <button
-                  onClick={() => setShowModal(true)}
+                  onClick={handleWatchEpisode}
+                  name={d.id}
                   className="episode-btn"
                 >
                   Watch Episodes <i className="fas fa-arrow-right"></i>

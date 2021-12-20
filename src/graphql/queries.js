@@ -4,6 +4,7 @@ export const LOAD_DATA = gql`
   query {
     characters {
       results {
+        id
         name
         image
         origin {
@@ -14,3 +15,15 @@ export const LOAD_DATA = gql`
     }
   }
 `;
+
+// export const LOAD_MODAL_DATA = gql`
+//   query {
+//     character($Id: ID!) {
+//       name
+//       episode {
+//         episode
+//         air_date
+//       }
+//     }
+//   }
+// `;
