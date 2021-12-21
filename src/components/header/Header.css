@@ -12,13 +12,17 @@
   width: 15%;
 }
 
-#searchBox {
+.searchBox {
   width: 50%;
   height: 23px;
   padding: 10px 30px;
   border-radius: 15px;
   border-width: 0;
   background: rgb(76 79 82 / 7%);
+}
+.searchBox-dark {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.76);
 }
 
 .mode {

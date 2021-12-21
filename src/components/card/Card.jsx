@@ -1,22 +1,40 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useQuery } from "@apollo/client";
 import { LOAD_DATA } from "../../graphql/queries";
 import { RootContext } from "../../contexts/Context";
 import Modal from "../modal/Modal";
 import "./Card.css";
-import { Link } from "react-router-dom";
 
 function Card() {
-  const { setShowModal, setgqlData, gqldata, setmodalId, showModal } =
-    useContext(RootContext);
+  const {
+    setShowModal,
+    setgqlData,
+    gqldata,
+    setmodalId,
+    showModal,
+    searchKey,
+    darkMode,
+  } = useContext(RootContext);
 
   const { error, loading, data } = useQuery(LOAD_DATA);
+  useEffect(
+    (v) => {
+      if (data) setgqlData(data.characters.results);
 
-  useEffect(() => {
-    if (data) {
-      setgqlData(data.characters.results);
-    }
-  }, [data]);
+      if (data) {
+        if (searchKey) {
+          setgqlData(
+            data.characters.results.filter((i) => {
+              if (i.name.toLowerCase().includes(searchKey)) return i;
+            })
+          );
+        }
+      }
+    },
+    [data, searchKey, setgqlData]
+  );
+
+  var likes = [];
 
   const handleWatchEpisode = (e) => {
     setShowModal(true);
@@ -29,12 +47,18 @@ function Card() {
       {gqldata ? (
         gqldata.map((d) => {
           return (
-            <div className="card" key={d.id}>
+            <div className={`card ${darkMode && "dark"}`} key={d.id}>
               <img src={d.image} alt="image_" />
               <div className="content">
                 <div className="top">
                   <h2 className="card-title">{d.name}</h2>
-                  <i className="far fa-heart"></i>
+                  <i
+                    onClick={(e) => {
+                      likes.push(e.target.id);
+                    }}
+                    id={d.id}
+                    className="far fa-heart"
+                  ></i>
                 </div>
                 <div className="detail">
                   <div className="origin">
@@ -46,7 +70,6 @@ function Card() {
                     <h4>{d.species}</h4>
                   </div>
                 </div>
-                {/* {console.log(d.id)} */}
                 <button
                   onClick={handleWatchEpisode}
                   name={d.id}

@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState } from "react";
 import Home from "./components/home/Home";
 import { RootContext } from "./contexts/Context";
 import { Route, Routes } from "react-router-dom";
@@ -32,20 +32,27 @@ const client = new ApolloClient({
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-
   const [gqldata, setgqlData] = useState([]);
+  const [Liked, setLiked] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalId, setmodalId] = useState();
   const [modalData, setModaldata] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
 
   return (
-    <div className="App">
+    <div className={`App ${darkMode && "dark"}`}>
       <RootContext.Provider
         value={{
+          darkMode,
           showModal,
           modalData,
           modalId,
           gqldata,
+          Liked,
+          searchKey,
+          setSearchKey,
+          setLiked,
+          setDarkMode,
           setgqlData,
           setmodalId,
           setShowModal,

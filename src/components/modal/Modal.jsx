@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Episode from "../episode/Episode";
 import { RootContext } from "../../contexts/Context";
-// import { LOAD_MODAL_DATA } from "../../graphql/queries";
 import "./Modal.css";
 
 function Modal() {
@@ -29,7 +28,6 @@ function Modal() {
 
   useEffect(() => {
     if (data) {
-      // setgqlData(data.characters.results);
       setName(data.character.name);
       setImage(data.character.image);
       setEpisode(data.character.episode);
@@ -58,13 +56,11 @@ function Modal() {
             <hr />
           </div>
         )}
-        {/* <div className="modal-content"> */}
         <div className="bottom">
           {episodes &&
             episodes.map((episode) => (
               <Episode key={episode.id} episode={episode} />
             ))}
-          {/* </div> */}
         </div>
       </div>
     </div>

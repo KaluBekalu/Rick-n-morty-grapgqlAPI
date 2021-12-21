@@ -29,3 +29,19 @@ code {
   column-gap: 20px;
 }
 
+.dark {
+  background: rgb(26, 25, 25);
+  color: white;
+}
+
+.light {
+  background: white;
+  color: black;
+}
+
+.white_text {
+  color: #fff;
+}
+.dark_text {
+  color: rgb(26, 25, 25);
+}
